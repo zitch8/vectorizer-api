@@ -24,7 +24,7 @@ def post_recommendations(tags: TagsInput):
 
     store_food_tags_vector = cv.transform([', '.join(store_food_tags)])
     cosine_similarities = cosine_similarity(vector, store_food_tags_vector).flatten()
-    recommeded_indices = cosine_similarities.argsort()[-26:][::-1]
+    recommeded_indices = cosine_similarities.argsort()[-10:][::-1]
     recommended_recipes = df.iloc[recommeded_indices]
 
     response_data = []
@@ -51,8 +51,6 @@ def post_recommendations(tags: TagsInput):
             continue
 
     return response_data
-
-
 
 class IngredientsInput(BaseModel):
     ingredients: str
