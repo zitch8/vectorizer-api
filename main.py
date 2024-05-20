@@ -17,14 +17,15 @@ def post_recommendations(tags: TagsInput):
     vector = cv.fit_transform(df['tags']).toarray()
     
     store_food_tags = []
-    for food in tags.tags:
-        food_index = df[df['id_'] == food].index[0]
-        food_tag = df.loc[food_index, 'tags']
-        store_food_tags.append(food_tag)
+    store_food_tags = df.loc[df['id_'].isin(tags.tags), 'tags'].tolist()
+    store_food_tags_str = ', '.join(store_food_tags)
 
-    store_food_tags_vector = cv.transform([', '.join(store_food_tags)])
+    store_food_tags_vector = cv.transform([store_food_tags_str])
+    
     cosine_similarities = cosine_similarity(vector, store_food_tags_vector).flatten()
+    
     recommeded_indices = cosine_similarities.argsort()[-10:][::-1]
+    
     recommended_recipes = df.iloc[recommeded_indices]
 
     response_data = []
