@@ -1,0 +1,11 @@
+__pycache__
+cleaned_food.csv
+dishes.csv
+fatchum-58b51-firebase-adminsdk-j4uns-7f5434e7ea.json
+Food_Dataset_Tags.csv
+ingredient_and_instructions.json
+main.py
+model.ipynb
+recommendation.ipynb
+recommendation.py
+test.py
